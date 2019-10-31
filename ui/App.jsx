@@ -1,8 +1,27 @@
-import React from 'react';
-import { TEXTS } from '../shared/constants';
+import React, { Component } from 'react';
+import { Meteor } from 'meteor/meteor';
+import { Communities } from '../collections/communities';
+import { withTracker } from 'meteor/react-meteor-data';
 
-export const App = () => (
-  <div>
-    <h1>{TEXTS.HOME_TITLE}</h1>
-  </div>
-);
+class App extends Component {
+  componentDidMount() {
+    Communities.allow({
+      insert() {
+        return { name: 'Tralala' };
+      },
+    });
+  }
+  render() {
+    console.log(this.props.CommunitiesArray);
+    return <p>Tralala</p>;
+  }
+}
+
+export default withTracker(() => {
+  const handle = Meteor.subscribe('communities');
+
+  return {
+    communitiesLoading: !handle.ready(),
+    CommunitiesArray: Communities.find().fetch(),
+  };
+})(App);

@@ -14,7 +14,8 @@
     "meteor-node-stubs": "^0.4.1",
     "prettier": "^1.18.2",
     "react": "^16.10.2",
-    "react-dom": "^16.10.2"
+    "react-dom": "^16.10.2",
+    "react-meteor-hooks": "^0.3.1"
   },
   "meteor": {
     "mainModule": {
