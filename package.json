@@ -24,9 +24,11 @@
     }
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.25",
     "@pathable/eslint-config-pathable": "^1.0.19",
     "@testing-library/cypress": "^5.0.2",
     "babel-eslint": "^8.2.2",
+    "bootstrap": "^4.3.1",
     "cypress": "^3.4.1",
     "eslint": "^4.19.1"
   }
