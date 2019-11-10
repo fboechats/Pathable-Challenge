@@ -1,3 +1,4 @@
+// More like a test to make sure things are rendered as expected
 describe('Rendering tests', () => {
   beforeEach(() => {
     cy.visit('/');

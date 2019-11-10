@@ -1,3 +1,4 @@
+// Testing all open/close buttons to see if they are working as expected
 describe('Button tests', () => {
   beforeEach(() => {
     cy.visit('/');

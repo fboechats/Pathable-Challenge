@@ -3,6 +3,7 @@ body {
   font-family: sans-serif;
 }
 
+/*Css to create a spin for loading purposes.*/
 .spin {
   display: inline-block;
   width: 200px;

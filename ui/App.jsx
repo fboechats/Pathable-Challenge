@@ -6,6 +6,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends Component {
+  // function to show the list of people associated to the event also handle open/close button changes
   displayingList(event, communityName) {
     const list = document.getElementsByClassName(`${communityName}`)[0];
 
@@ -22,22 +23,26 @@ class App extends Component {
       : (event.target.innerText = 'Open');
   }
 
+  // Simple function just to not repeat a lot
   fullName(people) {
     return `${people.firstName} ${people.lastName}`;
   }
 
+  // function to handle date so it can be displayed in a more user friendly way
   checkInDateParse(people) {
     return people.checkInDate
       ? `Check-In: ${new Date(people.checkInDate).toLocaleString('en-US')}`
       : 'Check-In: N/A';
   }
 
+  // Same thing as above function, but for check-out date
   checkOutDateParse(people) {
     return people.checkOutDate
       ? `Check-Out: ${new Date(people.checkOutDate).toLocaleString('en-US')}`
       : 'Check-Out: N/A';
   }
 
+  // function that update if person is checked in or out, also update the date that the user checked in or out
   CheckInOut(_id) {
     const checked = People.findOne({ _id }).checked;
 
@@ -56,6 +61,7 @@ class App extends Component {
         );
   }
 
+  // function to return how much people in the current event are checked in
   peopleCheckedIn(people, id) {
     const checkedInArray = people.filter(
       p => p.checked && p.communityId === id
@@ -63,6 +69,7 @@ class App extends Component {
     return `People in the event right now: ${checkedInArray.length}`;
   }
 
+  // function to return how much people from each company are checked in
   peopleCheckedInByCompany(people, id) {
     const companiesArray = people
       .filter(p => p.companyName && p.checked && p.communityId === id)
@@ -81,6 +88,7 @@ class App extends Component {
     );
   }
 
+  // return how much people are not checked in
   peopleNotCheckedIn(people, id) {
     const checkedInArray = people.filter(
       p => !p.checked && p.communityId === id
@@ -88,6 +96,7 @@ class App extends Component {
     return `People not checked-in: ${checkedInArray.length}`;
   }
 
+  // function to render the list of peoples
   renderPeoples(communityName, communityId) {
     return (
       <div
@@ -203,11 +212,14 @@ class App extends Component {
 }
 
 export default withTracker(() => {
+  // Subscribing to the colletion, so I can retrieve the data
   const subscription = Meteor.subscribe('communities.all');
   const subscription2 = Meteor.subscribe('people.all');
 
   return {
+    // Loading prop to wait finish subscription before doing something
     loading: subscription.ready() && subscription2.ready(),
+    // Fetching collections datas
     communitiesArray:
       subscription.ready() &&
       subscription2.ready() &&

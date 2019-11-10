@@ -1,3 +1,4 @@
+// Testing if check-in button are working as expected and are changing summary of people checked in
 describe('Check In', () => {
   it('Should be able to check in', () => {
     cy.get('button')
